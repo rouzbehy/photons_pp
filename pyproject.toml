@@ -1,0 +1,10 @@
+[project]
+name = "photons-pp"
+version = "0.1.0"
+description = "Program for simulating photon spectra in proton-proton collisions."
+readme = "README.md"
+requires-python = ">=3.9.15"
+dependencies = [
+    "numpy>=2.0.2",
+    "pandas>=2.3.3",
+]

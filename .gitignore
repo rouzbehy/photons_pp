@@ -1,0 +1,20 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.ruff_cache/
+
+# Virtual environments
+.venv
+
+# MAC OS nonsense
+.DS_Store
+
+# data folders and files
+./data/*
+*.csv
+*.txt
+
