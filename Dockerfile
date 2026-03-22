@@ -27,11 +27,12 @@ RUN curl -O https://pythia.org/download/pythia83/pythia${PYTHIA_VERSION}.tgz && 
     make -j2 && \
     make install
 
-# 5. Configure Environment Variables
-# Pythia needs these to find its XML settings and shared libraries
+# 5. Configure Environment Variables: for Pythia
 ENV PYTHIA8DATA=/usr/local/share/Pythia8/xmldoc
 ENV PYTHONPATH=/usr/local/lib:${PYTHONPATH:-}
 ENV LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH:-}
+# ADD THIS LINE TO FIX THE HARDLINK WARNING:
+ENV UV_LINK_MODE=copy
 
 WORKDIR /app
 
@@ -40,5 +41,5 @@ WORKDIR /app
 RUN uv venv .venv --system-site-packages
 ENV PATH="/app/.venv/bin:$PATH"
 
-# Default to bash so you can run 'just' commands interactively
+# Default to bash
 CMD ["/bin/bash"]
