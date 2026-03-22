@@ -66,7 +66,4 @@ class Histogram:
             norm = (value - self.min) / (self.max - self.min)
         return min(int(norm * self.bins), self.bins - 1)
 
-    def add(self, value: float):
-        idx = self._get_bin_index(value)
-        if idx != -1:
-            self.counts[idx] += 1
+
