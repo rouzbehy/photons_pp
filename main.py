@@ -25,9 +25,7 @@ def capture(p: PartonType, cuts: KinematicCuts) -> bool:
 parser = argparse.ArgumentParser(prog="Photon Spectrum Generator")
 parser.add_argument("--ptmin", type=float, default=10, help="Minimum pTHat value")
 parser.add_argument("--ptmax", type=float, default=0, help="Maximum pTHat value")
-parser.add_argument(
-    "--ecm", type=float, default=2760, help="Centre of mass energy value"
-)
+parser.add_argument("--ecm", type=float, default=2760, help="Centre of mass energy value")
 parser.add_argument("--nevts", type=int, default=2000, help="Number of events")
 
 
@@ -47,7 +45,7 @@ if __name__ == "__main__":
         f"PhaseSpace:pTHatMax={args.ptmax}"
     )  # phase space cuts in the hard process
     pythia.readString(f"Beams:eCM={args.ecm}")  # beam center of mass energy
-    pythia.readString("PDF:pSet=8") # CTEQ6L.1
+    pythia.readString("PDF:pSet=8")  # CTEQ6L.1
     pythia.readString("Print:quiet=on")
     pythia.readString("Print:next=off")
 
@@ -70,7 +68,7 @@ if __name__ == "__main__":
     # write hist to file
     directory = Path(f"./data/energy_{int(args.ecm)}/")
     directory.mkdir(exist_ok=True, parents=True)
-    fname = f"pt_hat_{args.ptmin:0.2f}_{args.ptmax:0.2f}".replace(".","p") + ".csv"
+    fname = f"pt_hat_{args.ptmin:0.2f}_{args.ptmax:0.2f}".replace(".", "p") + ".csv"
     fname_and_path = directory / fname
     with open(fname_and_path, "w") as fout:
         fout.write("ptmin,ptmax,count\n")
