@@ -1,5 +1,8 @@
 set shell := ["bash", "-c"]
 
+build-docker:
+    sudo docker build -t photons_pythia . 
+
 run-parallel:
     uv run python3 generate_jobs.py
 
