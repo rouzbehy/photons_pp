@@ -3,15 +3,32 @@ import math
 
 class Histogram:
     def __init__(
-        self, bins: int, range_min: float, range_max: float, scale: str = "linear"
+        self,
+        bins: int | list[float],
+        range_min: float | None = None,
+        range_max: float | None = None,
+        scale: str = "linear",
     ):
-        self.bins = bins
-        self.min = range_min
-        self.max = range_max
-        self.scale = scale.lower()
-        self.counts = [0] * bins
+        if isinstance(bins, list):
+            # Manual bins: must be sorted and have at least 2 edges
+            if len(bins) < 2:
+                raise ValueError("Manual bins must contain at least 2 edges.")
+            self.bin_edges = sorted(bins)
+            self.bins = len(self.bin_edges) - 1
+            self.min = self.bin_edges[0]
+            self.max = self.bin_edges[-1]
+            self.scale = "manual"
+        else:
+            # Standard uniform bins
+            self.bins = bins
+            self.min = range_min
+            self.max = range_max
+            self.scale = scale.lower()
+            self.bin_edges = [self._get_value_at_index(i) for i in range(self.bins + 1)]
 
-        if self.scale == "log" and self.min <= 0:
+        self.counts = [0] * self.bins
+
+        if self.scale == "log" and self.min is not None and self.min <= 0:
             raise ValueError("Min range must be > 0 for log scale.")
 
     def _get_bin_index(self, value: float) -> int:
@@ -65,5 +82,3 @@ class Histogram:
         else:
             norm = (value - self.min) / (self.max - self.min)
         return min(int(norm * self.bins), self.bins - 1)
-
-

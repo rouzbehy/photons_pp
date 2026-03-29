@@ -6,6 +6,7 @@ from typing import TypeAlias
 import pythia8
 
 from histogram import Histogram
+from util import get_ptbins
 
 PartonType: TypeAlias = pythia8.Particle
 
@@ -51,8 +52,9 @@ if __name__ == "__main__":
 
     pythia.init()
 
+    ptbins_for_energy = get_ptbins()
     cuts = KinematicCuts(lower_eta=-1.0, upper_eta=1.0)
-    hist = Histogram(bins=10, range_min=1, range_max=50, scale="log")
+    hist = Histogram(bins=ptbins_for_energy[args.ecm])
 
     for i in range(args.nevts):
         if not pythia.next():
