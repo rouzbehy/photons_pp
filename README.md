@@ -11,3 +11,5 @@ The project is managed by `uv` and needs `just` and `docker` to have been instal
 `docker build -t photons_pythia . `
 2. To run the docker container in interactive mode, run `docker run -it --rm -v $(pwd):/app photons_pythia /bin/bash`.
 Note that the `-v $(pwd):/app` is needed to make the directory accessible from outside of the container and make its data persistent after the simulations are done.
+3. To format the code using Ruff, run `uv run ruff format .`
+4. To format imports using Ruff, run `uv run ruff check --select I --fix` 
