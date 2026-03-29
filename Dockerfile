@@ -40,7 +40,9 @@ RUN groupadd -g ${GROUP_ID} appuser && \
 
 # 7. Finalize Workspace
 WORKDIR /app
-RUN chown appuser:appuser /app
+
+# Ensure the appuser owns the directory and any pre-existing files
+RUN chown -R appuser:appuser /app
 USER appuser
 
 # Use system python directly to access Pythia bindings
