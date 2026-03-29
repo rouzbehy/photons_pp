@@ -14,7 +14,10 @@ wheels/
 .DS_Store
 
 # data folders and files
-./data/*
-*.csv
-*.txt
+data/
+!./results/
+
+# specific files that I don't need tracked
+metadata.txt
+job_list.txt
 
