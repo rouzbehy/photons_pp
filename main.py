@@ -61,7 +61,7 @@ if __name__ == "__main__":
             continue
         # Count photons (ID == 22) in the event record
         target_photons_in_event = filter(
-            lambda x: capture(x, cuts), [p for p in pythia.event if p.id() == 22]
+            lambda x: capture(x, cuts), [p for p in pythia.event if p.id() == 22 and p.isFinal()]
         )
         # bin the photons that passed the filter
         for p in target_photons_in_event:
