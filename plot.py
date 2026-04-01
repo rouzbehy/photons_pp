@@ -149,4 +149,4 @@ if __name__ == "__main__":
     )
 
     fig = plot(theory=theory_df, experiment=experiment_df)
-    fig.savefig("./fig.pdf")
+    fig.savefig(f"./fig_{args.energy}.pdf")
